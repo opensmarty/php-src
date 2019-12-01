@@ -11,13 +11,11 @@ if (!extension_loaded("mbstring")) {
 ?>
 --INI--
 zend.multibyte=1
-mbstring.internal_encoding=big5
+internal_encoding=big5
 --FILE--
 <?php
 echo '\'hello';
 ?>
 
-===DONE===
 --EXPECT--
 'hello
-===DONE===

@@ -1,5 +1,5 @@
 --TEST--
-Bug #26698 (Thrown exceptions while evaluting argument to pass as parameter crash PHP)
+Bug #26698 (Thrown exceptions while evaluating argument to pass as parameter crash PHP)
 --FILE--
 <?php
 
@@ -65,9 +65,7 @@ $p->callOne();
 $p->callTwo();
 $p->callThree();
 ?>
-===DONE===
 --EXPECT--
 Caught: NONE
 Caught: NONE
 Caught: NONE
-===DONE===

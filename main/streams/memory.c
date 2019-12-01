@@ -1,8 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 7                                                        |
-   +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2017 The PHP Group                                |
+   | Copyright (c) The PHP Group                                          |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,8 +13,6 @@
    | Author: Marcus Boerger <helly@php.net>                               |
    +----------------------------------------------------------------------+
  */
-
-/* $Id$ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -46,13 +42,13 @@ typedef struct {
 
 
 /* {{{ */
-static size_t php_stream_memory_write(php_stream *stream, const char *buf, size_t count)
+static ssize_t php_stream_memory_write(php_stream *stream, const char *buf, size_t count)
 {
 	php_stream_memory_data *ms = (php_stream_memory_data*)stream->abstract;
 	assert(ms != NULL);
 
 	if (ms->mode & TEMP_STREAM_READONLY) {
-		return 0;
+		return (ssize_t) -1;
 	} else if (ms->mode & TEMP_STREAM_APPEND) {
 		ms->fpos = ms->fsize;
 	}
@@ -79,7 +75,7 @@ static size_t php_stream_memory_write(php_stream *stream, const char *buf, size_
 
 
 /* {{{ */
-static size_t php_stream_memory_read(php_stream *stream, char *buf, size_t count)
+static ssize_t php_stream_memory_read(php_stream *stream, char *buf, size_t count)
 {
 	php_stream_memory_data *ms = (php_stream_memory_data*)stream->abstract;
 	assert(ms != NULL);
@@ -264,7 +260,7 @@ static int php_stream_memory_set_option(php_stream *stream, int option, int valu
 }
 /* }}} */
 
-PHPAPI php_stream_ops	php_stream_memory_ops = {
+PHPAPI const php_stream_ops	php_stream_memory_ops = {
 	php_stream_memory_write, php_stream_memory_read,
 	php_stream_memory_close, php_stream_memory_flush,
 	"MEMORY",
@@ -370,7 +366,7 @@ typedef struct {
 
 
 /* {{{ */
-static size_t php_stream_temp_write(php_stream *stream, const char *buf, size_t count)
+static ssize_t php_stream_temp_write(php_stream *stream, const char *buf, size_t count)
 {
 	php_stream_temp_data *ts = (php_stream_temp_data*)stream->abstract;
 	assert(ts != NULL);
@@ -400,7 +396,7 @@ static size_t php_stream_temp_write(php_stream *stream, const char *buf, size_t 
 
 
 /* {{{ */
-static size_t php_stream_temp_read(php_stream *stream, char *buf, size_t count)
+static ssize_t php_stream_temp_read(php_stream *stream, char *buf, size_t count)
 {
 	php_stream_temp_data *ts = (php_stream_temp_data*)stream->abstract;
 	size_t got;
@@ -560,7 +556,7 @@ static int php_stream_temp_set_option(php_stream *stream, int option, int value,
 }
 /* }}} */
 
-PHPAPI php_stream_ops	php_stream_temp_ops = {
+PHPAPI const php_stream_ops	php_stream_temp_ops = {
 	php_stream_temp_write, php_stream_temp_read,
 	php_stream_temp_close, php_stream_temp_flush,
 	"TEMP",
@@ -622,7 +618,7 @@ PHPAPI php_stream *_php_stream_temp_open(int mode, size_t max_memory_usage, char
 }
 /* }}} */
 
-PHPAPI php_stream_ops php_stream_rfc2397_ops = {
+PHPAPI const php_stream_ops php_stream_rfc2397_ops = {
 	php_stream_temp_write, php_stream_temp_read,
 	php_stream_temp_close, php_stream_temp_flush,
 	"RFC2397",
@@ -772,7 +768,7 @@ static php_stream * php_stream_url_wrap_rfc2397(php_stream_wrapper *wrapper, con
 	return stream;
 }
 
-PHPAPI php_stream_wrapper_ops php_stream_rfc2397_wops = {
+PHPAPI const php_stream_wrapper_ops php_stream_rfc2397_wops = {
 	php_stream_url_wrap_rfc2397,
 	NULL, /* close */
 	NULL, /* fstat */
@@ -786,17 +782,8 @@ PHPAPI php_stream_wrapper_ops php_stream_rfc2397_wops = {
 	NULL, /* stream_metadata */
 };
 
-PHPAPI php_stream_wrapper php_stream_rfc2397_wrapper =	{
+PHPAPI const php_stream_wrapper php_stream_rfc2397_wrapper =	{
 	&php_stream_rfc2397_wops,
 	NULL,
 	1, /* is_url */
 };
-
-/*
- * Local variables:
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- * vim600: noet sw=4 ts=4 fdm=marker
- * vim<600: noet sw=4 ts=4
- */

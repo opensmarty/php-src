@@ -7,6 +7,14 @@
 #include "php.h"
 #include "ext/standard/info.h"
 #include "php_%EXTNAME%.h"
+#include "%EXTNAME%_arginfo.h"
+
+/* For compatibility with older PHP versions */
+#ifndef ZEND_PARSE_PARAMETERS_NONE
+#define ZEND_PARSE_PARAMETERS_NONE() \
+	ZEND_PARSE_PARAMETERS_START(0, 0) \
+	ZEND_PARSE_PARAMETERS_END()
+#endif
 
 /* {{{ void %EXTNAME%_test1()
  */
@@ -59,19 +67,9 @@ PHP_MINFO_FUNCTION(%EXTNAME%)
 }
 /* }}} */
 
-/* {{{ arginfo
- */
-ZEND_BEGIN_ARG_INFO(arginfo_%EXTNAME%_test1, 0)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO(arginfo_%EXTNAME%_test2, 0)
-	ZEND_ARG_INFO(0, str)
-ZEND_END_ARG_INFO()
-/* }}} */
-
 /* {{{ %EXTNAME%_functions[]
  */
-const zend_function_entry %EXTNAME%_functions[] = {
+static const zend_function_entry %EXTNAME%_functions[] = {
 	PHP_FE(%EXTNAME%_test1,		arginfo_%EXTNAME%_test1)
 	PHP_FE(%EXTNAME%_test2,		arginfo_%EXTNAME%_test2)
 	PHP_FE_END
@@ -100,4 +98,3 @@ ZEND_TSRMLS_CACHE_DEFINE()
 # endif
 ZEND_GET_MODULE(%EXTNAME%)
 #endif
-%FOOTER%

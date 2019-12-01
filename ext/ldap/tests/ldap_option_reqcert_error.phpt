@@ -4,8 +4,8 @@ ldap_option_reqcert_error() - A test to check if ldap cant connect to a LDAP ser
 Edwin Hoksberg <edwin@edwinhoksberg.nl>
 --SKIPIF--
 <?php
-	require_once dirname(__FILE__) .'/skipif.inc';
-	require_once dirname(__FILE__) .'/skipifbindfailure.inc';
+	require_once __DIR__ .'/skipif.inc';
+	require_once __DIR__ .'/skipifbindfailure.inc';
 ?>
 --FILE--
 <?php
@@ -18,7 +18,5 @@ ldap_set_option($link, LDAP_OPT_PROTOCOL_VERSION, $protocol_version);
 
 var_dump(@ldap_bind($link, $user, $passwd));
 ?>
-===DONE===
 --EXPECT--
 bool(true)
-===DONE===

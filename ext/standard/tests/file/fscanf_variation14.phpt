@@ -1,5 +1,5 @@
 --TEST--
-Test fscanf() function: usage variations - string formats with strings 
+Test fscanf() function: usage variations - string formats with strings
 --FILE--
 <?php
 
@@ -10,9 +10,9 @@ Test fscanf() function: usage variations - string formats with strings
 
 /* Test fscanf() to scan different strings using different string format types */
 
-$file_path = dirname(__FILE__);
+$file_path = __DIR__;
 
-echo "*** Test fscanf(): different string format types with different string ***\n"; 
+echo "*** Test fscanf(): different string format types with different string ***\n";
 
 // create a file
 $filename = "$file_path/fscanf_variation14.tmp";
@@ -65,7 +65,7 @@ $valid_strings = array(
 );
 
 // various string formats
-$string_formats = array( "%s", 
+$string_formats = array( "%s",
                          "%hs", "%ls", "%Ls",
                          " %s", "%s ", "% s",
                          "\t%s", "\n%s", "%4s",
@@ -76,8 +76,12 @@ $counter = 1;
 
 // writing to the file
 foreach($valid_strings as $string) {
-  @fprintf($file_handle, $string);
-  @fprintf($file_handle, "\n");
+    try {
+        fprintf($file_handle, $string);
+    } catch (\ValueError $e) {
+    } catch (\ArgumentCountError $e) {
+    }
+  fprintf($file_handle, "\n");
 }
 // closing the file
 fclose($file_handle);
@@ -104,7 +108,7 @@ echo "\n*** Done ***";
 ?>
 --CLEAN--
 <?php
-$file_path = dirname(__FILE__);
+$file_path = __DIR__;
 $filename = "$file_path/fscanf_variation14.tmp";
 unlink($filename);
 ?>
@@ -1076,4 +1080,3 @@ array(0) {
 bool(false)
 
 *** Done ***
-

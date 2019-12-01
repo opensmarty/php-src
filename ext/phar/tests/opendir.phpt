@@ -7,7 +7,7 @@ phar.require_hash=1
 phar.readonly=0
 --FILE--
 <?php
-$fname = dirname(__FILE__) . '/' . basename(__FILE__, '.php') . '.phar.php';
+$fname = __DIR__ . '/' . basename(__FILE__, '.php') . '.phar.php';
 $a = new Phar($fname);
 $a['index.php'] = '<?php
 $a = opendir("dir");
@@ -30,9 +30,8 @@ echo "\n";
 opendir('phar://');
 opendir('phar://hi.phar');
 ?>
-===DONE===
 --CLEAN--
-<?php unlink(dirname(__FILE__) . '/' . basename(__FILE__, '.clean.php') . '.phar.php'); ?>
+<?php unlink(__DIR__ . '/' . basename(__FILE__, '.clean.php') . '.phar.php'); ?>
 --EXPECTF--
 file1.txtfile2.txtfile3.txt
 
@@ -41,4 +40,3 @@ phar url "phar://" is unknown in %sopendir.php on line %d
 
 Warning: opendir(phar://hi.phar): failed to open dir: phar error: invalid url or non-existent phar "phar://hi.phar"
 phar url "phar://hi.phar" is unknown in %sopendir.php on line %d
-===DONE===

@@ -1,5 +1,5 @@
 --TEST--
-Test hebrevc() function : basic functionality 
+Test hebrevc() function : basic functionality
 --FILE--
 <?php
 
@@ -16,15 +16,18 @@ var_dump(hebrevc($hebrew_text));
 var_dump(hebrevc($hebrew_text, 15));
 
 ?>
-===DONE===
 --EXPECTF--
 *** Testing hebrevc() : basic functionality ***
+
+Deprecated: Function hebrevc() is deprecated in %s on line %d
 string(239) ".The hebrevc function converts logical Hebrew text to visual text<br />
 ) This function is similar to hebrev() with the difference that it converts newlines<br />
 <to '<br (<br />
 .'<br />
 .The function tries to avoid breaking words<br />
 "
+
+Deprecated: Function hebrevc() is deprecated in %s on line %d
 string(317) "to visual text<br />
 Hebrew text<br />
 logical<br />
@@ -44,4 +47,3 @@ breaking words<br />
 tries to avoid<br />
 .The function<br />
 "
-===DONE===

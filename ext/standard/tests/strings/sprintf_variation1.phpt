@@ -3,7 +3,7 @@ Test sprintf() function : usage variations - unexpected values for format argume
 --FILE--
 <?php
 /* Prototype  : string sprintf(string $format [, mixed $arg1 [, mixed ...]])
- * Description: Return a formatted string 
+ * Description: Return a formatted string
  * Source code: ext/standard/formatted_print.c
 */
 
@@ -87,7 +87,7 @@ $values = array(
 $count = 1;
 foreach($values as $value) {
   echo "\n-- Iteration $count --\n";
-  
+
   // with default argument
   var_dump( sprintf($value) );
 
@@ -155,57 +155,57 @@ string(3) "0.5"
 
 -- Iteration 10 --
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
 -- Iteration 11 --
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
 -- Iteration 12 --
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
 -- Iteration 13 --
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
 -- Iteration 14 --
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
-Notice: Array to string conversion in %s on line %d
+Warning: Array to string conversion in %s on line %d
 string(5) "Array"
 
 -- Iteration 15 --

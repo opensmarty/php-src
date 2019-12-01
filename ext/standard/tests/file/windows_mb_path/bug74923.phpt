@@ -2,7 +2,7 @@
 Bug #74923 Crash when crawling through network share
 --SKIPIF--
 <?php
-include dirname(__FILE__) . DIRECTORY_SEPARATOR . "util.inc";
+include __DIR__ . DIRECTORY_SEPARATOR . "util.inc";
 
 skip_if_not_win();
 if (getenv("SKIP_SLOW_TESTS")) die("skip slow test");
@@ -19,8 +19,6 @@ $s = '\\\\hello.com' . str_repeat('\\', 260);
 var_dump($s, @stat($s));
 
 ?>
-===DONE===
 --EXPECTF--
 string(271) "%s"
 bool(false)
-===DONE===

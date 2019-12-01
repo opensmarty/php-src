@@ -5,20 +5,12 @@ Test scandir() function : usage variations - different directory permissions
 if( substr(PHP_OS, 0, 3) == 'WIN') {
 	die('skip Not for Windows');
 }
-// Skip if being run by root (files are always readable, writeable and executable)
-$filename = dirname(__FILE__)."/dir_root_check.tmp";
-$fp = fopen($filename, 'w');
-fclose($fp);
-if(fileowner($filename) == 0) {
-	unlink ($filename);
-	die('skip...cannot be run as root\n');
-}
-unlink($filename);
+require __DIR__ . '/../skipif_root.inc';
 ?>
 --FILE--
 <?php
 /* Prototype  : array scandir(string $dir [, int $sorting_order [, resource $context]])
- * Description: List files & directories inside the specified path 
+ * Description: List files & directories inside the specified path
  * Source code: ext/standard/dir.c
  */
 
@@ -30,14 +22,14 @@ unlink($filename);
 
 echo "*** Testing scandir() : usage variations ***\n";
 
-/* 
+/*
  * create the temporary directory :
  * scandir_variation5  ( parent )
  *  |-> sub_dir     ( sub parent )
  *      |-> child_dir  ( child dir)
  */
 
-$parent_dir_path = dirname(__FILE__) . "/scandir_variation5";
+$parent_dir_path = __DIR__ . "/scandir_variation5";
 mkdir($parent_dir_path);
 chmod($parent_dir_path, 0777);
 
@@ -63,10 +55,9 @@ chmod($parent_dir_path, 0666); // restricting parent directory
 echo "\n-- After restricting parent directory --\n";
 var_dump(scandir($child_dir_path));
 ?>
-===DONE===
 --CLEAN--
 <?php
-$parent_dir_path = dirname(__FILE__) . "/scandir_variation5";
+$parent_dir_path = __DIR__ . "/scandir_variation5";
 $sub_dir_path = $parent_dir_path."/sub_dir";
 $child_dir_path = $sub_dir_path."/child_dir";
 
@@ -95,4 +86,3 @@ Warning: scandir(%s/scandir_variation5/sub_dir/child_dir): failed to open dir: %
 
 Warning: scandir(): (errno %d): %s in %s on line %d
 bool(false)
-===DONE===

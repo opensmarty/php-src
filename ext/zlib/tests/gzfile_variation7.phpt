@@ -27,9 +27,7 @@ foreach ( $variation_array as $var ) {
   var_dump(gzfile( $var ,  $use_include_path ) );
 }
 ?>
-===DONE===
 --EXPECTF--
-
 Warning: gzfile(string): failed to open stream: No such file or directory in %s on line %d
 bool(false)
 
@@ -41,4 +39,3 @@ bool(false)
 
 Warning: gzfile(hello world): failed to open stream: No such file or directory in %s on line %d
 bool(false)
-===DONE===

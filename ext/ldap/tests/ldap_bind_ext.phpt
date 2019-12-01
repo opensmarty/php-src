@@ -3,8 +3,8 @@ ldap_bind_ext() - Basic binding
 --CREDITS--
 Côme Chilliet <mcmic@php.net>
 --SKIPIF--
-<?php require_once dirname(__FILE__) .'/skipif.inc'; ?>
-<?php require_once dirname(__FILE__) .'/skipifbindfailure.inc'; ?>
+<?php require_once __DIR__ .'/skipif.inc'; ?>
+<?php require_once __DIR__ .'/skipifbindfailure.inc'; ?>
 <?php
 require_once('skipifcontrol.inc');
 skipifunsupportedcontrol(LDAP_CONTROL_PASSWORDPOLICYREQUEST);
@@ -43,7 +43,6 @@ var_dump(
 	$ctrls
 );
 ?>
-===DONE===
 --EXPECTF--
 resource(%d) of type (ldap result)
 bool(true)
@@ -69,4 +68,3 @@ int(34)
 string(10) "invalid DN"
 array(0) {
 }
-===DONE===

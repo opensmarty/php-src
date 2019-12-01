@@ -3,9 +3,9 @@ Test date_sunset() function : usage variation -  Checking sunrise for consecutiv
 --FILE--
 <?php
 /* Prototype  : mixed date_sunset(mixed time [, int format [, float latitude [, float longitude [, float zenith [, float gmt_offset]]]]])
- * Description: Returns time of sunrise for a given day and location 
+ * Description: Returns time of sunrise for a given day and location
  * Source code: ext/date/php_date.c
- * Alias to functions: 
+ * Alias to functions:
  */
 
 echo "*** Testing date_sunset() : usage variation ***\n";
@@ -29,12 +29,11 @@ foreach($inputs as $timezone => $value) {
 	 date_default_timezone_set($timezone);
 	 $time = mktime(8, 8, 8, 8, 11, 2008);
 	 var_dump( date_sunset($time, SUNFUNCS_RET_STRING, $value["Latitude"], $value["Longitude"], 90, $value["GMT"] ));
-	 $time = mktime(8, 8, 8, 8, 12, 2008); 
+	 $time = mktime(8, 8, 8, 8, 12, 2008);
 	 var_dump( date_sunset($time, SUNFUNCS_RET_STRING, $value["Latitude"], $value["Longitude"], 90, $value["GMT"]) );
 }
 ?>
-===DONE===
---EXPECTF--
+--EXPECT--
 *** Testing date_sunset() : usage variation ***
 
 --Pacific/Samoa--
@@ -72,4 +71,3 @@ string(5) "17:21"
 --Pacific/Wallis--
 string(5) "17:36"
 string(5) "17:36"
-===DONE===

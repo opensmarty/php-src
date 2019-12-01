@@ -28,7 +28,6 @@ var_dump(
 	ldap_get_entries($link, $result)['count']
 );
 ?>
-===DONE===
 --CLEAN--
 <?php
 include "connect.inc";
@@ -37,6 +36,7 @@ $link = ldap_connect_and_bind($host, $port, $user, $passwd, $protocol_version);
 remove_dummy_data($link, $base);
 ?>
 --EXPECTF--
+Deprecated: Function ldap_control_paged_result() is deprecated in %s.php on line %d
 bool(true)
 resource(%d) of type (ldap result)
 bool(true)
@@ -44,4 +44,3 @@ string(22) "1.2.840.113556.1.4.319"
 int(%d)
 string(%d) "%s"
 int(1)
-===DONE===
